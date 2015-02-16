@@ -193,6 +193,10 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
                                     fnct_inv=_set_suppliers, priority=4),
     }
 
+    _defaults = {
+        'categ_id': 1
+    }
+
 
 class StockMove(mixin.SenderMixin, models.Model):
     _name = 'stock.move'
@@ -210,5 +214,4 @@ class StockMove(mixin.SenderMixin, models.Model):
     _columns = {
         'partner': fields.function(_get_parnter, method=True, type='char',
                                     fnct_inv=_set_partner, priority=1),
-        'categ_id': 1
     }
