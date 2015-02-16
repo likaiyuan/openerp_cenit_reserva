@@ -165,7 +165,9 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
         for var in value:
             domain = [('name', '=', var['firstname'])]
             pid = partner.search(cr, uid, domain)
-            if not pid:
+            if pid:
+                pid = pid[0]
+            else:
                 pid = partner.create(cr, uid, {x[0]: x[2] for x in domain})
             sellers.append((0, 0, {'name': pid}))
         self.write(cr, uid, oid, {'seller_ids': sellers})

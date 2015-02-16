@@ -13,7 +13,6 @@
             <field name="name">upc</field>
 			<field name="line_type">field</field>
 			<field name="value">id</field>
-			<field name="primary" eval="True"/>
 			<field name="data_type_id" ref="data_type_product"/>
         </record>
 		
@@ -28,6 +27,7 @@
             <field name="name">name</field>
 			<field name="line_type">field</field>
 			<field name="value">name</field>
+			<field name="primary" eval="True"/>
 			<field name="data_type_id" ref="data_type_product"/>
         </record>
 		
