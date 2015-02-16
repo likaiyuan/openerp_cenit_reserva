@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+    	
+		<!-- Country -->
+		
+		<record id="data_type_country" model="cenit.data.type">
+            <field name="name">country</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'res.country')]" />
+        </record>
+		
+		<record id="data_type_country_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_country"/>
+        </record>
+    	
+		<!-- State -->
+		
+		<record id="data_type_state" model="cenit.data.type">
+            <field name="name">state</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'res.country.state')]" />
+        </record>
+		
+		<record id="data_type_state_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_state"/>
+        </record>
+
+		<!-- Res Partner -->
+        
+        <record id="data_type_res_partner" model="cenit.data.type">
+            <field name="name">address</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'res.partner')]" />
+        </record>
+		
+		<record id="data_type_res_partner_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">firstname</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_lastname" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">lastname</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_street" model="cenit.data.type.line">
+            <field name="name">street</field>
+			<field name="line_type">field</field>
+			<field name="value">address1</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_street2" model="cenit.data.type.line">
+            <field name="name">street2</field>
+			<field name="line_type">field</field>
+			<field name="value">address2</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_city" model="cenit.data.type.line">
+            <field name="name">city</field>
+			<field name="line_type">field</field>
+			<field name="value">city</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_state_id" model="cenit.data.type.line">
+            <field name="name">state_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="data_type_state" />
+			<field name="value">state</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_country_id" model="cenit.data.type.line">
+            <field name="name">country_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="data_type_country" />
+			<field name="value">country</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_phone" model="cenit.data.type.line">
+            <field name="name">phone</field>
+			<field name="line_type">field</field>
+			<field name="value">phone</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
+		<record id="data_type_res_partner_zip" model="cenit.data.type.line">
+            <field name="name">zip</field>
+			<field name="line_type">field</field>
+			<field name="value">zipcode</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		   
+    </data>
+</openerp>

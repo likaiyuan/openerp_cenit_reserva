@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+    	
+		<!-- Product -->
+        
+        <record id="data_type_product" model="cenit.data.type">
+            <field name="name">product</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'product.template')]" />
+        </record>
+		
+		<record id="data_type_product_default_code" model="cenit.data.type.line">
+            <field name="name">upc</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_default_code_sku" model="cenit.data.type.line">
+            <field name="name">upc</field>
+			<field name="line_type">field</field>
+			<field name="value">sku</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">name</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_description" model="cenit.data.type.line">
+            <field name="name">description</field>
+			<field name="line_type">field</field>
+			<field name="value">description</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_price" model="cenit.data.type.line">
+            <field name="name">list_price</field>
+			<field name="line_type">field</field>
+			<field name="value">price</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_standard_price" model="cenit.data.type.line">
+            <field name="name">standard_price</field>
+			<field name="line_type">field</field>
+			<field name="value">cost_price</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_create_date" model="cenit.data.type.line">
+            <field name="name">create_date</field>
+			<field name="line_type">field</field>
+			<field name="value">available_on</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_shipping_category" model="cenit.data.type.line">
+            <field name="name">qty_available_text</field>
+			<field name="line_type">field</field>
+			<field name="value">shipping_category</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_taxons" model="cenit.data.type.line">
+            <field name="name">taxons</field>
+			<field name="line_type">field</field>
+			<field name="value">taxons</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_options" model="cenit.data.type.line">
+            <field name="name">options</field>
+			<field name="line_type">field</field>
+			<field name="value">options</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_properties" model="cenit.data.type.line">
+            <field name="name">properties</field>
+			<field name="line_type">field</field>
+			<field name="value">properties</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_variants" model="cenit.data.type.line">
+            <field name="name">variants</field>
+			<field name="line_type">field</field>
+			<field name="value">variants</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<record id="data_type_product_suppliers" model="cenit.data.type.line">
+            <field name="name">suppliers</field>
+			<field name="line_type">field</field>
+			<field name="value">suppliers</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
+		<!-- Variant -->
+		
+		<record id="data_type_variant" model="cenit.data.type">
+            <field name="name">variant</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'product.product')]" />
+        </record>
+		
+		<record id="data_type_variant_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_variant"/>
+        </record>
+		
+		<!-- Currency -->
+		
+		<record id="data_type_currency" model="cenit.data.type">
+            <field name="name">currency</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'res.currency')]" />
+        </record>
+		
+		<record id="data_type_usda_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_currency"/>
+        </record>
+		
+		<!-- Inventory -->
+		
+		<record id="data_type_inventory" model="cenit.data.type">
+            <field name="name">inventory</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'stock.move')]" />
+        </record>
+		
+		<record id="data_type_inventory_id" model="cenit.data.type.line">
+            <field name="name">id</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_partner_id" model="cenit.data.type.line">
+            <field name="name">partner</field>
+			<field name="line_type">field</field>
+			<field name="value">partner</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_quantity" model="cenit.data.type.line">
+            <field name="name">product_qty</field>
+			<field name="line_type">field</field>
+			<field name="value">quantity</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_product_id" model="cenit.data.type.line">
+            <field name="name">sku</field>
+			<field name="line_type">field</field>
+			<field name="value">product_id</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		   
+    </data>
+</openerp>

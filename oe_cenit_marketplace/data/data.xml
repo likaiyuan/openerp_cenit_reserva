@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+    	
+		<!-- Usda -->
+        
+        <record id="data_type_usda" model="cenit.data.type">
+            <field name="name">usda</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'market.usda.data')]" />
+        </record>
+		
+		<record id="data_type_usda_markettype" model="cenit.data.type.line">
+            <field name="name">markettype</field>
+			<field name="line_type">field</field>
+			<field name="value">markettype</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_commodityname" model="cenit.data.type.line">
+            <field name="name">commodityname</field>
+			<field name="line_type">field</field>
+			<field name="value">commodityname</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_cityname" model="cenit.data.type.line">
+            <field name="name">cityname</field>
+			<field name="line_type">field</field>
+			<field name="value">cityname</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_typecommodity" model="cenit.data.type.line">
+            <field name="name">typecommodity</field>
+			<field name="line_type">field</field>
+			<field name="value">typecommodity</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_package" model="cenit.data.type.line">
+            <field name="name">package</field>
+			<field name="line_type">field</field>
+			<field name="value">package</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_variety" model="cenit.data.type.line">
+            <field name="name">variety</field>
+			<field name="line_type">field</field>
+			<field name="value">variety</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_subvariety" model="cenit.data.type.line">
+            <field name="name">subvariety</field>
+			<field name="line_type">field</field>
+			<field name="value">subvariaty</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_grade" model="cenit.data.type.line">
+            <field name="name">grade</field>
+			<field name="line_type">field</field>
+			<field name="value">grade</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_date" model="cenit.data.type.line">
+            <field name="name">date</field>
+			<field name="line_type">field</field>
+			<field name="value">date</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_lowprice" model="cenit.data.type.line">
+            <field name="name">lowprice</field>
+			<field name="line_type">field</field>
+			<field name="value">lowprice</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_highprice" model="cenit.data.type.line">
+            <field name="name">highprice</field>
+			<field name="line_type">field</field>
+			<field name="value">highprice</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_average" model="cenit.data.type.line">
+            <field name="name">average</field>
+			<field name="line_type">field</field>
+			<field name="value">average</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_mostlylow" model="cenit.data.type.line">
+            <field name="name">mostlylow</field>
+			<field name="line_type">field</field>
+			<field name="value">mostlylow</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_mostlyhigh" model="cenit.data.type.line">
+            <field name="name">mostlyhigh</field>
+			<field name="line_type">field</field>
+			<field name="value">mostlyhigh</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_origin" model="cenit.data.type.line">
+            <field name="name">origin</field>
+			<field name="line_type">field</field>
+			<field name="value">origin</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_origindistrict" model="cenit.data.type.line">
+            <field name="name">origindistrict</field>
+			<field name="line_type">field</field>
+			<field name="value">origindistrict</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_itemsize" model="cenit.data.type.line">
+            <field name="name">itemsize</field>
+			<field name="line_type">field</field>
+			<field name="value">itemsize</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_markettone" model="cenit.data.type.line">
+            <field name="name">markettone</field>
+			<field name="line_type">field</field>
+			<field name="value">markettone</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_per_lb" model="cenit.data.type.line">
+            <field name="name">per_lb</field>
+			<field name="line_type">field</field>
+			<field name="value">per_lb</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<record id="data_type_usda_date_created" model="cenit.data.type.line">
+            <field name="name">date_created</field>
+			<field name="line_type">field</field>
+			<field name="value">date_created</field>
+			<field name="data_type_id" ref="data_type_usda"/>
+        </record>
+		
+		<!-- Commodity -->
+		
+		<record id="data_type_commodity" model="cenit.data.type">
+            <field name="name">commodity</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'market.commodity')]" />
+        </record>
+		
+		<record id="data_type_commodity_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">commodity</field>
+			<field name="data_type_id" ref="data_type_commodity"/>
+        </record>
+		
+		<record id="data_type_commodity_commodityabbr" model="cenit.data.type.line">
+            <field name="name">commodityabbr</field>
+			<field name="line_type">field</field>
+			<field name="value">commodityabbr</field>
+			<field name="data_type_id" ref="data_type_commodity"/>
+        </record>
+		
+		<record id="data_type_commodity_source_market" model="cenit.data.type.line">
+            <field name="name">source_market</field>
+			<field name="line_type">field</field>
+			<field name="value">source_market</field>
+			<field name="data_type_id" ref="data_type_commodity"/>
+        </record>
+		
+		<record id="data_type_commodity_slug" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">slug</field>
+			<field name="data_type_id" ref="data_type_commodity"/>
+        </record>
+		
+		<record id="data_type_commodity_slug_id" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_commodity"/>
+        </record>
+		
+		<!-- Variety -->
+		
+		<record id="data_type_variety" model="cenit.data.type">
+            <field name="name">variety</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'market.variety')]" />
+        </record>
+		
+		<record id="data_type_variety_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">variety</field>
+			<field name="data_type_id" ref="data_type_variety"/>
+        </record>
+		
+		<record id="data_type_variety_slug" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">slug</field>
+			<field name="data_type_id" ref="data_type_variety"/>
+        </record>
+		
+		<record id="data_type_variety_slug_id" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_variety"/>
+        </record>
+		
+		<record id="data_type_variety_commodity_id" model="cenit.data.type.line">
+            <field name="name">commodity_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="data_type_commodity" />
+			<field name="value">commodity</field>
+			<field name="data_type_id" ref="data_type_variety"/>
+        </record>
+		
+		<!-- Package -->
+		
+		<record id="data_type_package" model="cenit.data.type">
+            <field name="name">package</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'market.package')]" />
+        </record>
+		
+		<record id="data_type_package_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">package</field>
+			<field name="data_type_id" ref="data_type_package"/>
+        </record>
+		
+		<record id="data_type_package_weight_lb" model="cenit.data.type.line">
+            <field name="name">weight_lb</field>
+			<field name="line_type">field</field>
+			<field name="value">weight_lb</field>
+			<field name="data_type_id" ref="data_type_package"/>
+        </record>
+		
+		<record id="data_type_package_slug" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">slug</field>
+			<field name="data_type_id" ref="data_type_package"/>
+        </record>
+		
+		<record id="data_type_package_slug_id" model="cenit.data.type.line">
+            <field name="name">slug</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_package"/>
+        </record>
+		
+		<record id="data_type_package_commodity_id" model="cenit.data.type.line">
+            <field name="name">commodity_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="data_type_commodity" />
+			<field name="value">commodity</field>
+			<field name="data_type_id" ref="data_type_package"/>
+        </record>
+		   
+    </data>
+</openerp>

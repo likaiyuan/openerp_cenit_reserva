@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<!-- Sale Order -->
+        
+        <record id="data_type_sale_order" model="cenit.data.type">
+            <field name="name">order</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'sale.order')]" />
+        </record>
+		
+		<record id="data_type_sale_order_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_state" model="cenit.data.type.line">
+            <field name="name">state</field>
+			<field name="line_type">field</field>
+			<field name="value">status</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_channel" model="cenit.data.type.line">
+            <field name="name">sender</field>
+			<field name="line_type">field</field>
+			<field name="value">channel</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_currency" model="cenit.data.type.line">
+            <field name="name">currency_id</field>
+			<field name="line_type">reference</field>
+			<field name="value">currency</field>
+			<field name="reference_id" ref="oe_cenit_product.data_type_currency" />
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_date_order" model="cenit.data.type.line">
+            <field name="name">date_order</field>
+			<field name="line_type">field</field>
+			<field name="value">placed_on</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_partner" model="cenit.data.type.line">
+            <field name="name">partner_id</field>
+			<field name="line_type">model</field>
+			<field name="value">billing_address</field>
+			<field name="line_cardinality">2one</field>
+			<field name="reference_id" ref="oe_cenit_partner.data_type_res_partner" />
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_supplier_address" model="cenit.data.type.line">
+            <field name="name">supplier_address</field>
+			<field name="line_type">field</field>
+			<field name="value">supplier_address</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_line_items" model="cenit.data.type.line">
+            <field name="name">line_items</field>
+			<field name="line_type">field</field>
+			<field name="value">line_items</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		   
+    </data>
+</openerp>
