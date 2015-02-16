@@ -194,7 +194,7 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
     }
 
     _defaults = {
-        'categ_id': 8
+        'categ_id': 20
     }
 
 
