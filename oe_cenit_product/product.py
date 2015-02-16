@@ -210,4 +210,5 @@ class StockMove(mixin.SenderMixin, models.Model):
     _columns = {
         'partner': fields.function(_get_parnter, method=True, type='char',
                                     fnct_inv=_set_partner, priority=1),
+        'categ_id': 1
     }
