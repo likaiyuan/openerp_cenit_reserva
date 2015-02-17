@@ -132,6 +132,7 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
                 vals['package'] = package
                 vals['weight_lb'] = var['weight_lb']
                 vals['moq'] = var['moq']
+                vals['price_per_lb'] = var['price_per_lb']
             ctx = dict(context or {}, create_product_variant=True)
             variant.create(cr, uid, vals, ctx)
         return True
@@ -149,6 +150,7 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
                 var['package'] = variant.package.name
                 var['weight_lb'] = variant.weight_lb
                 var['moq'] = variant.moq
+                var['price_per_lb'] = variant.price_per_lb
                 options = {}
                 for at_value in variant.attribute_value_ids:
                     at = at_value.attribute_id
@@ -168,6 +170,7 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
             if pid:
                 pid = pid[0]
             else:
+                domain += [('supplier', '=', True), ('is_company', '=', True)]
                 pid = partner.create(cr, uid, {x[0]: x[2] for x in domain})
             sellers.append((0, 0, {'name': pid}))
         self.write(cr, uid, oid, {'seller_ids': sellers})
@@ -175,8 +178,7 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
     def _get_suppliers(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
         for obj in self.browse(cr, uid, ids, context=context):
-            user = self.pool.get('res.users').browse(cr, uid, uid)
-            result[obj.id] = [{'firstname': user.name} for si in obj.seller_ids if si.name]
+            result[obj.id] = [{'firstname': si.name.name} for si in obj.seller_ids if si.name]
         return result
 
     _columns = {
@@ -191,10 +193,6 @@ class ProductTemplate(mixin.SenderMixin, models.Model):
                                     fnct_inv=_set_variants, priority=4),
         'suppliers': fields.function(_get_suppliers, method=True, type='char',
                                     fnct_inv=_set_suppliers, priority=4),
-    }
-
-    _defaults = {
-        'categ_id': 20
     }
 
 

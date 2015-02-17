@@ -4,8 +4,9 @@ from openerp import models
 from openerp.osv import fields
 from openerp.addons.oe_cenit_client import mixin
 
+STATES = openerp.addons.sale.sale.sale_order._columns['state'].selection
 
-#class SaleOrder(mixin.SenderMixin, models.Model):
+
 class SaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = 'sale.order'
@@ -54,17 +55,17 @@ class SaleOrder(models.Model):
         lines = []
         for var in value:
             vals = self._convert(cr, uid, var, context)
-            domain = [(k, '=', v) for k, v in vals.items()]
-            domain.append(('order_id', '=', oid))
+            domain = [
+                ('order_id', '=', oid),
+                ('product_id.name', '=', var['product_id']),
+            ]
             pl_ids = sale_line.search(cr, uid, domain)
             if pl_ids:
                 lines.append((1, pl_ids[0], vals))
             else:
                 lines.append((0, 0, vals))
         if lines:
-            #to_write = {'order_line': lines, 'sender': 'client'}
-            to_write = {'order_line': lines}
-            self.write(cr, uid, oid, to_write)
+            self.write(cr, uid, oid, {'order_line': lines})
 
     def _get_lines(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
@@ -100,3 +101,9 @@ class SaleOrder(models.Model):
     _defaults = {
         'channel': 'campo por gusto'
     }
+
+    def write(self, cr, uid, ids, vals, context=None):
+        if vals.get('state', False):
+            if vals['state'] not in dict(STATES).keys():
+                return False
+        return super(SaleOrder, self).write(cr, uid, ids, vals, context)
