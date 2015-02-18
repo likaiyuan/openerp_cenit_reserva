@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+		
+		<!-- Inventory -->
+		
+		<record id="data_type_inventory" model="cenit.data.type">
+            <field name="name">inventory</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'stock.move')]" />
+        </record>
+		
+		<record id="data_type_inventory_id" model="cenit.data.type.line">
+            <field name="name">id</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_partner_id" model="cenit.data.type.line">
+            <field name="name">partner</field>
+			<field name="line_type">field</field>
+			<field name="value">partner</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_quantity" model="cenit.data.type.line">
+            <field name="name">product_qty</field>
+			<field name="line_type">field</field>
+			<field name="value">quantity</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		
+		<record id="data_type_inventory_product_id" model="cenit.data.type.line">
+            <field name="name">sku</field>
+			<field name="line_type">field</field>
+			<field name="value">product_id</field>
+			<field name="data_type_id" ref="data_type_inventory"/>
+        </record>
+		   
+    </data>
+</openerp>

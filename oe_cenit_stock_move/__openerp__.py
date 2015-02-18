@@ -20,7 +20,7 @@
 ##############################################################################
 
 {
-    'name': 'OpenERP Cenit Product',
+    'name': 'OpenERP Cenit Stock Move',
     'version': '0.1',
     'author': 'OpenJAF',
     'website': 'http://www.openjaf.com',
@@ -28,7 +28,7 @@
     'description': """
         OpenERP Cenit Product
     """,
-    'depends': ['oe_cenit_client', 'product'],
+    'depends': ['oe_cenit_client', 'stock'],
     'data': ['data/data.xml'],
     'installable': True
 }

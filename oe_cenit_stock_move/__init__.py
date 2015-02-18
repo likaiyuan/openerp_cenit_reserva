@@ -19,16 +19,4 @@
 #
 ##############################################################################
 
-{
-    'name': 'OpenERP Cenit Product',
-    'version': '0.1',
-    'author': 'OpenJAF',
-    'website': 'http://www.openjaf.com',
-    'category': 'Integration',
-    'description': """
-        OpenERP Cenit Product
-    """,
-    'depends': ['oe_cenit_client', 'product'],
-    'data': ['data/data.xml'],
-    'installable': True
-}
+import stock
