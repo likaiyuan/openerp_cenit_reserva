@@ -68,6 +68,63 @@
 			<field name="value">line_items</field>
 			<field name="data_type_id" ref="data_type_purchase_order"/>
         </record>
+		
+		<!-- Request -->
+		
+		<record id="purchase_data_type_request" model="cenit.data.type">
+            <field name="name">request</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'purchase.requisition')]" />
+        </record>
+		
+		<record id="purchase_data_type_request_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">name</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_partner" model="cenit.data.type.line">
+            <field name="name">partner_id</field>
+			<field name="line_type">field</field>
+			<field name="value">customer</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_ordering_date" model="cenit.data.type.line">
+            <field name="name">ordering_date</field>
+			<field name="line_type">field</field>
+			<field name="value">ordering_date</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_date_end" model="cenit.data.type.line">
+            <field name="name">date_end</field>
+			<field name="line_type">field</field>
+			<field name="value">date_end</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_schedule_date" model="cenit.data.type.line">
+            <field name="name">schedule_date</field>
+			<field name="line_type">field</field>
+			<field name="value">schedule_date</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_description" model="cenit.data.type.line">
+            <field name="name">description</field>
+			<field name="line_type">field</field>
+			<field name="value">description</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_request_detail" model="cenit.data.type.line">
+            <field name="name">request_detail</field>
+			<field name="line_type">field</field>
+			<field name="value">request_detail</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
 		   
     </data>
 </openerp>

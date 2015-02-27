@@ -28,7 +28,7 @@
     'description': """
         OpenERP Cenit Purchase Order
     """,
-    'depends': ['oe_cenit_product', 'oe_cenit_partner', 'purchase'],
+    'depends': ['oe_cenit_product', 'oe_cenit_partner', 'purchase', 'purchase_requisition'],
     'data': ['data/data.xml'],
     'installable': True
 }

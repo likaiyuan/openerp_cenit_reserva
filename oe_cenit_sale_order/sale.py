@@ -99,12 +99,5 @@ class SaleOrder(models.Model):
     }
 
     _defaults = {
-        'channel': 'campo por gusto'
+        'channel': 'origin'
     }
-
-    def write(self, cr, uid, ids, vals, context=None):
-        if vals.get('state', False):
-            if vals['state'] not in dict(STATES).keys():
-                return False
-        return super(SaleOrder, self).write(cr, uid, ids, vals, context)
-

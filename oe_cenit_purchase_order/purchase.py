@@ -90,11 +90,55 @@ class PurchaseOrder(models.Model):
     }
 
     _defaults = {
-        'channel': 'campo por gusto'
+        'channel': 'origin'
     }
 
-    def write(self, cr, uid, ids, vals, context=None):
-        if vals.get('state', False):
-            if vals['state'] not in dict(STATES).keys():
-                return False
-        return super(PurchaseOrder, self).write(cr, uid, ids, vals, context)
+
+class PurchaseRequisition(models.Model):
+    _name = 'purchase.requisition'
+    _inherit = 'purchase.requisition'
+
+    def _get_resource(self, cr, uid, model_name, resource_name):
+        model = self.pool.get('market.%s' % model_name)
+        res_ids = model.search(cr, uid, [('name', '=', resource_name)])
+        return res_ids and res_ids[0] or False
+
+    def _set_lines(self, cr, uid, oid, name, value, args, context=None):
+        line = self.pool.get('market.request.line')
+        context = context or {}
+        for var in value:
+            vals = {}
+            vals['requisition_id'] = oid
+            vals['product_qty'] = var['quantity']
+            vals['schedule_date'] = var['schedule_date']
+            for x in ['commodity', 'variety', 'package']:
+                vals['%s_id' % x] = self._get_resource(cr, uid, x, var[x])
+            line.create(cr, uid, vals)
+        return True
+
+    def _get_lines(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            lines = []
+            for line in obj.line_ids:
+                var = {}
+                var['commodity'] = line.commodity_id.name
+                var['variety'] = line.variety_id.name
+                var['package'] = line.package_id.name
+                var['quantity'] = line.product_qty
+                var['schedule_date'] = line.schedule_date
+                lines.append(var)
+            result[obj.id] = str(lines)
+        return result
+
+    def _get_partner(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = obj.company_id.partner_id.name
+        return result
+
+    _columns = {
+        'request_detail': fields.function(_get_lines, method=True,
+                                           type='char', fnct_inv=_set_lines),
+        'partner_id': fields.function(_get_partner, method=True, type='char')
+    }
