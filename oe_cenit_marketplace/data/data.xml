@@ -290,9 +290,18 @@
 		
 		<record id="sale_data_type_request_partner" model="cenit.data.type.line">
             <field name="name">partner_id</field>
-			<field name="line_type">reference</field>
-			<field name="reference_id" ref="oe_cenit_partner.data_type_res_partner" />
+			<field name="line_type">model</field>
 			<field name="value">customer</field>
+			<field name="line_cardinality">2one</field>
+			<field name="reference_id" ref="oe_cenit_partner.data_type_res_partner" />
+			<field name="data_type_id" ref="sale_data_type_request"/>
+        </record>
+		
+		<record id="sale_data_type_request_country" model="cenit.data.type.line">
+            <field name="name">country_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="oe_cenit_partner.data_type_country" />
+			<field name="value">country</field>
 			<field name="data_type_id" ref="sale_data_type_request"/>
         </record>
 		
@@ -329,6 +338,72 @@
 			<field name="line_type">field</field>
 			<field name="value">request_detail</field>
 			<field name="data_type_id" ref="sale_data_type_request"/>
+        </record>
+		
+		<!-- Category -->
+		
+		<record id="data_type_category" model="cenit.data.type">
+            <field name="name">category</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'product.category')]" />
+        </record>
+		
+		<record id="data_type_category_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">name</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_category"/>
+        </record>
+		
+		<record id="data_type_category_parent" model="cenit.data.type.line">
+            <field name="name">parent_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="data_type_category" />
+			<field name="value">parent</field>
+			<field name="data_type_id" ref="data_type_category"/>
+        </record>
+		
+		<!-- Attribute -->
+		
+		<record id="data_type_attribute" model="cenit.data.type">
+            <field name="name">attribute</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'product.attribute')]" />
+        </record>
+		
+		<record id="data_type_attribute_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">name</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_attribute"/>
+        </record>
+		
+		<record id="data_type_attribute_belongs_to" model="cenit.data.type.line">
+            <field name="name">belongs_to</field>
+			<field name="line_type">field</field>
+			<field name="value">belongs_to</field>
+			<field name="data_type_id" ref="data_type_attribute"/>
+        </record>
+		
+		<record id="data_type_attribute_attribute_type" model="cenit.data.type.line">
+            <field name="name">attribute_type</field>
+			<field name="line_type">field</field>
+			<field name="value">attribute_type</field>
+			<field name="data_type_id" ref="data_type_attribute"/>
+        </record>
+		
+		<record id="data_type_attribute_mandatory" model="cenit.data.type.line">
+            <field name="name">mandatory</field>
+			<field name="line_type">field</field>
+			<field name="value">mandatory</field>
+			<field name="data_type_id" ref="data_type_attribute"/>
+        </record>
+		
+		<record id="data_type_attribute_source" model="cenit.data.type.line">
+            <field name="name">source</field>
+			<field name="line_type">field</field>
+			<field name="value">source</field>
+			<field name="data_type_id" ref="data_type_attribute"/>
         </record>
 		   
     </data>

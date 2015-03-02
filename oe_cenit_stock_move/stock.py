@@ -2,10 +2,9 @@
 
 from openerp import models
 from openerp.osv import fields
-from openerp.addons.oe_cenit_client import mixin
 
 
-class StockMove(mixin.SenderMixin, models.Model):
+class StockMove(models.Model):
     _name = 'stock.move'
     _inherit = 'stock.move'
 

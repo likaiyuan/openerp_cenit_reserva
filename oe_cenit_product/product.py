@@ -2,10 +2,9 @@
 
 from openerp import models
 from openerp.osv import fields
-from openerp.addons.oe_cenit_client import mixin
 
 
-class ProductTemplate(mixin.SenderMixin, models.Model):
+class ProductTemplate(models.Model):
     _name = 'product.template'
     _inherit = 'product.template'
 

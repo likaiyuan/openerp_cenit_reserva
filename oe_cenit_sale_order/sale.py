@@ -2,7 +2,6 @@
 import openerp
 from openerp import models
 from openerp.osv import fields
-from openerp.addons.oe_cenit_client import mixin
 
 STATES = openerp.addons.sale.sale.sale_order._columns['state'].selection
 

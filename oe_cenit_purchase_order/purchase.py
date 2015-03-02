@@ -2,7 +2,6 @@
 import openerp
 from openerp import models
 from openerp.osv import fields
-from openerp.addons.oe_cenit_client import mixin
 
 STATES = openerp.addons.purchase.purchase.purchase_order.STATE_SELECTION
 
@@ -110,7 +109,6 @@ class PurchaseRequisition(models.Model):
             vals = {}
             vals['requisition_id'] = oid
             vals['product_qty'] = var['quantity']
-            vals['schedule_date'] = var['schedule_date']
             for x in ['commodity', 'variety', 'package']:
                 vals['%s_id' % x] = self._get_resource(cr, uid, x, var[x])
             line.create(cr, uid, vals)
@@ -126,7 +124,6 @@ class PurchaseRequisition(models.Model):
                 var['variety'] = line.variety_id.name
                 var['package'] = line.package_id.name
                 var['quantity'] = line.product_qty
-                var['schedule_date'] = line.schedule_date
                 lines.append(var)
             result[obj.id] = str(lines)
         return result
@@ -134,11 +131,18 @@ class PurchaseRequisition(models.Model):
     def _get_partner(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
         for obj in self.browse(cr, uid, ids, context=context):
-            result[obj.id] = obj.company_id.partner_id.name
+            result[obj.id] = {'firstname': obj.company_id.partner_id.name}
+        return result
+
+    def _get_country(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = obj.company_id.partner_id.country_id.name
         return result
 
     _columns = {
         'request_detail': fields.function(_get_lines, method=True,
                                            type='char', fnct_inv=_set_lines),
-        'partner_id': fields.function(_get_partner, method=True, type='char')
+        'partner_id': fields.function(_get_partner, method=True, type='char'),
+        'country_id': fields.function(_get_country, method=True, type='char')
     }

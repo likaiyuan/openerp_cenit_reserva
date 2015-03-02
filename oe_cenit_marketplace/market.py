@@ -20,7 +20,6 @@ class MarketRequest(models.Model):
             vals = {}
             vals['request_id'] = oid
             vals['quantity'] = var['quantity']
-            vals['schedule_date'] = var['schedule_date']
             for x in ['commodity', 'variety', 'package']:
                 vals['%s_id' % x] = self._get_resource(cr, uid, x, var[x])
             line.create(cr, uid, vals)
@@ -36,7 +35,6 @@ class MarketRequest(models.Model):
                 var['variety'] = line.variety_id.name
                 var['package'] = line.package_id.name
                 var['quantity'] = line.quantity
-                var['schedule_date'] = line.schedule_date
                 lines.append(var)
             result[obj.id] = str(lines)
         return result
