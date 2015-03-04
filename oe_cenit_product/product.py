@@ -49,7 +49,6 @@ class ProductTemplate(models.Model):
             else:
                 vals = {'name': tx, 'parent_id': current_tx}
                 current_tx = pc.create(cr, uid, vals, context)
-        #to_write = {'categ_id': current_tx, 'sender': 'client'}
         to_write = {'categ_id': current_tx}
         self.write(cr, uid, oid, to_write, context=context)
 
@@ -78,7 +77,7 @@ class ProductTemplate(models.Model):
                                         'value_ids': [(6, 0, [attr_value_id])]
                                     }))
         if attribute_lines:
-            to_write = {'attribute_line_ids': attribute_lines, 'sender': 'client'}
+            to_write = {'attribute_line_ids': attribute_lines}
             self.write(cr, uid, oid, to_write)
 
     def _get_properties(self, cr, uid, ids, name, args, context=None):
@@ -111,13 +110,13 @@ class ProductTemplate(models.Model):
         context = context or {}
         for var in value:
             vals = {}
-            for a, v in var['options'].items():
-                a_attr = a.lower()
-                # if a in self._options
-                if a_attr in variant._columns:
-                    attr_id = self._get_attribute(cr, uid, a, context)
-                    attr_value_id = self._get_attribute_value(cr, uid, str(v), attr_id, context)
-                    vals[a_attr] = attr_value_id
+            #for a, v in var['options'].items():
+            #    a_attr = a.lower()
+            #    # if a in self._options
+            #    if a_attr in variant._columns:
+            #        attr_id = self._get_attribute(cr, uid, a, context)
+            #        attr_value_id = self._get_attribute_value(cr, uid, str(v), attr_id, context)
+            #        vals[a_attr] = attr_value_id
             vals['default_code'] = var['sku']
             vals['product_tmpl_id'] = oid
             if 'package' in var:
@@ -150,12 +149,12 @@ class ProductTemplate(models.Model):
                 var['weight_lb'] = variant.weight_lb
                 var['moq'] = variant.moq
                 var['price_per_lb'] = variant.price_per_lb
-                options = {}
-                for at_value in variant.attribute_value_ids:
-                    at = at_value.attribute_id
-                    value = at_value.name
-                    options[at.name] = value
-                var['options'] = options
+                #options = {}
+                #for at_value in variant.attribute_value_ids:
+                #    at = at_value.attribute_id
+                #    value = at_value.name
+                #    options[at.name] = value
+                #var['options'] = options
                 variants.append(var)
             result[obj.id] = str(variants)
         return result
