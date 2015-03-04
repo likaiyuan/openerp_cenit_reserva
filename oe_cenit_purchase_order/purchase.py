@@ -137,7 +137,7 @@ class PurchaseRequisition(models.Model):
     def _get_country(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
         for obj in self.browse(cr, uid, ids, context=context):
-            result[obj.id] = obj.company_id.partner_id.country_id.name
+            result[obj.id] = obj.country.name
         return result
 
     _columns = {
