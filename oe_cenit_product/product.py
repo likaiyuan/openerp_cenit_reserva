@@ -130,6 +130,7 @@ class ProductTemplate(models.Model):
                 vals['package'] = package
                 vals['weight_lb'] = var['weight_lb']
                 vals['moq'] = var['moq']
+                vals['size_count'] = var['size_count']
                 vals['price_per_lb'] = var['price_per_lb']
             ctx = dict(context or {}, create_product_variant=True)
             variant.create(cr, uid, vals, ctx)
@@ -148,6 +149,7 @@ class ProductTemplate(models.Model):
                 var['package'] = variant.package.name
                 var['weight_lb'] = variant.weight_lb
                 var['moq'] = variant.moq
+                var['size_count'] = variant.size_count
                 var['price_per_lb'] = variant.price_per_lb
                 #options = {}
                 #for at_value in variant.attribute_value_ids:

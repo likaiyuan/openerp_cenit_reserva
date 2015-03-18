@@ -31,6 +31,13 @@
 			<field name="data_type_id" ref="data_type_product"/>
         </record>
 		
+		<record id="data_type_product_image" model="cenit.data.type.line">
+            <field name="name">image</field>
+			<field name="line_type">field</field>
+			<field name="value">image</field>
+			<field name="data_type_id" ref="data_type_product"/>
+        </record>
+		
 		<record id="data_type_product_description" model="cenit.data.type.line">
             <field name="name">description</field>
 			<field name="line_type">field</field>

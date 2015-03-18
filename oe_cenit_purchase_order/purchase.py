@@ -55,7 +55,7 @@ class PurchaseOrder(models.Model):
             vals = self._convert(cr, uid, var, context)
             domain = [
                 ('order_id', '=', oid),
-                ('product_id.name', '=', var['product_id']),
+                ('product_id.name', '=', var['product_id'])
             ]
             pl_ids = purchase_line.search(cr, uid, domain)
             if pl_ids:
