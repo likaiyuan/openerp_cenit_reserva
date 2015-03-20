@@ -67,15 +67,18 @@ class ProductTemplate(models.Model):
     def _set_properties(self, cr, uid, oid, name, value, args, context=None):
         context = context or {}
         attribute_lines = []
+        attrs = {x.attribute_id.id: x.id
+                 for x in self.browse(cr, uid, oid).attribute_line_ids}
         for a, v in value.items():
             if not v:
                 continue
             attr_id = self._get_attribute(cr, uid, a, context)
             attr_value_id = self._get_attribute_value(cr, uid, v, attr_id, context)
-            attribute_lines.append((0, 0, {
-                                        'attribute_id': attr_id,
-                                        'value_ids': [(6, 0, [attr_value_id])]
-                                    }))
+            if attr_id in attrs:
+                element = (1, attrs[attr_id], {'value_ids': [(6, 0, [attr_value_id])]})
+            else:
+                element = (0, 0, {'attribute_id': attr_id, 'value_ids': [(6, 0, [attr_value_id])]})
+            attribute_lines.append(element)
         if attribute_lines:
             to_write = {'attribute_line_ids': attribute_lines}
             self.write(cr, uid, oid, to_write)
@@ -107,33 +110,33 @@ class ProductTemplate(models.Model):
 
     def _set_variants(self, cr, uid, oid, name, value, args, context=None):
         variant = self.pool.get('product.product')
+        package = self.pool.get('market.package')
         context = context or {}
         for var in value:
-            vals = {}
-            #for a, v in var['options'].items():
-            #    a_attr = a.lower()
-            #    # if a in self._options
-            #    if a_attr in variant._columns:
-            #        attr_id = self._get_attribute(cr, uid, a, context)
-            #        attr_value_id = self._get_attribute_value(cr, uid, str(v), attr_id, context)
-            #        vals[a_attr] = attr_value_id
-            vals['default_code'] = var['sku']
-            vals['product_tmpl_id'] = oid
-            if 'package' in var:
-                pkg_model = self.pool.get('market.package')
-                pkg_ids = pkg_model.search(cr, uid, [('name', '=', var['package'])])
-                if pkg_ids:
-                    package = pkg_ids[0]
-                else:
-                    pkg_vals = {'name': var['package'], 'weight_lb': var['weight_lb']}
-                    package = pkg_model.create(cr, uid, pkg_vals)
-                vals['package'] = package
-                vals['weight_lb'] = var['weight_lb']
-                vals['moq'] = var['moq']
-                vals['size_count'] = var['size_count']
-                vals['price_per_lb'] = var['price_per_lb']
-            ctx = dict(context or {}, create_product_variant=True)
-            variant.create(cr, uid, vals, ctx)
+            vals = {
+                'default_code': var['sku'],
+                'weight_lb': var['weight_lb'],
+                'moq': var['moq'],
+                'size_count': var['size_count'],
+                'price_per_lb': var['price_per_lb'],
+            }
+            pkg_ids = package.search(cr, uid, [('name', '=', var['package'])])
+            if pkg_ids:
+                pkg_id = pkg_ids[0]
+            else:
+                pkg_vals = {'name': var['package'], 'weight_lb': var['weight_lb']}
+                pkg_id = package.create(cr, uid, pkg_vals)
+            domain = [('product_tmpl_id', '=', oid), ('package', '=', pkg_id)]
+            v_ids = variant.search(cr, uid, domain)
+            if v_ids:
+                variant.write(cr, uid, v_ids, vals)
+            else:
+                vals.update({
+                    'product_tmpl_id': oid,
+                    'package': pkg_id
+                })
+                ctx = dict(context or {}, create_product_variant=True)
+                variant.create(cr, uid, vals, ctx)
         return True
 
     def _get_variants(self, cr, uid, ids, name, args, context=None):
@@ -151,12 +154,6 @@ class ProductTemplate(models.Model):
                 var['moq'] = variant.moq
                 var['size_count'] = variant.size_count
                 var['price_per_lb'] = variant.price_per_lb
-                #options = {}
-                #for at_value in variant.attribute_value_ids:
-                #    at = at_value.attribute_id
-                #    value = at_value.name
-                #    options[at.name] = value
-                #var['options'] = options
                 variants.append(var)
             result[obj.id] = str(variants)
         return result
