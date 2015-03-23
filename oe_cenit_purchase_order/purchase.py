@@ -140,9 +140,16 @@ class PurchaseRequisition(models.Model):
             result[obj.id] = obj.country.name
         return result
 
+    def _get_destination(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = obj.destination.name
+        return result
+
     _columns = {
         'request_detail': fields.function(_get_lines, method=True,
                                            type='char', fnct_inv=_set_lines),
         'partner_id': fields.function(_get_partner, method=True, type='char'),
-        'country_id': fields.function(_get_country, method=True, type='char')
+        'country_id': fields.function(_get_country, method=True, type='char'),
+        'destination_id': fields.function(_get_destination, method=True, type='char')
     }

@@ -97,6 +97,20 @@
 			<field name="value">country</field>
 			<field name="data_type_id" ref="purchase_data_type_request"/>
         </record>
+
+		<record id="purchase_data_type_request_destination" model="cenit.data.type.line">
+            <field name="name">destination_id</field>
+			<field name="line_type">field</field>
+			<field name="value">destination</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
+		
+		<record id="purchase_data_type_request_frequency" model="cenit.data.type.line">
+            <field name="name">frequency</field>
+			<field name="line_type">field</field>
+			<field name="value">frequency</field>
+			<field name="data_type_id" ref="purchase_data_type_request"/>
+        </record>
 		
 		<record id="purchase_data_type_request_ordering_date" model="cenit.data.type.line">
             <field name="name">ordering_date</field>

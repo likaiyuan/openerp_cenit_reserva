@@ -305,6 +305,21 @@
 			<field name="data_type_id" ref="sale_data_type_request"/>
         </record>
 		
+		<record id="sale_data_type_request_destination" model="cenit.data.type.line">
+            <field name="name">destination_id</field>
+			<field name="line_type">reference</field>
+			<field name="reference_id" ref="oe_cenit_partner.data_type_country" />
+			<field name="value">destination</field>
+			<field name="data_type_id" ref="sale_data_type_request"/>
+        </record>
+		
+		<record id="sale_data_type_request_frequency" model="cenit.data.type.line">
+            <field name="name">frequency</field>
+			<field name="line_type">field</field>
+			<field name="value">frequency</field>
+			<field name="data_type_id" ref="sale_data_type_request"/>
+        </record>
+		
 		<record id="sale_data_type_request_ordering_date" model="cenit.data.type.line">
             <field name="name">ordering_date</field>
 			<field name="line_type">field</field>
