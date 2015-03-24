@@ -118,7 +118,7 @@ class ProductTemplate(models.Model):
                 'weight_lb': var['weight_lb'],
                 'moq': var['moq'],
                 'size_count': var['size_count'],
-                'price_per_lb': var['price_per_lb'],
+                'variant_price': var['variant_price'],
             }
             pkg_ids = package.search(cr, uid, [('name', '=', var['package'])])
             if pkg_ids:
@@ -153,7 +153,7 @@ class ProductTemplate(models.Model):
                 var['weight_lb'] = variant.weight_lb
                 var['moq'] = variant.moq
                 var['size_count'] = variant.size_count
-                var['price_per_lb'] = variant.price_per_lb
+                var['variant_price'] = variant.variant_price
                 variants.append(var)
             result[obj.id] = str(variants)
         return result
