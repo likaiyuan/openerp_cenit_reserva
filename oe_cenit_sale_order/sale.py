@@ -38,6 +38,7 @@ class SaleOrder(models.Model):
             partner = obj.company_id.partner_id
             var = {}
             var['firstname'] = partner.name
+            var['email'] = partner.email
             var['address1'] = partner.street
             var['address2'] = partner.street2
             var['city'] = partner.city

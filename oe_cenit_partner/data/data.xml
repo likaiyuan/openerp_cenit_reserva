@@ -54,6 +54,13 @@
 			<field name="data_type_id" ref="data_type_res_partner"/>
         </record>
 		
+		<record id="data_type_res_partner_email" model="cenit.data.type.line">
+            <field name="name">email</field>
+			<field name="line_type">field</field>
+			<field name="value">email</field>
+			<field name="data_type_id" ref="data_type_res_partner"/>
+        </record>
+		
 		<record id="data_type_res_partner_street" model="cenit.data.type.line">
             <field name="name">street</field>
 			<field name="line_type">field</field>

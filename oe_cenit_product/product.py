@@ -25,7 +25,7 @@ class ProductTemplate(models.Model):
             attr_id = pa.create(cr, uid, {'name': name})
         return attr_id
 
-    def _get_attribute_value(self, cr, uid, name, attr_id, context=None):
+    def _get_attr_value(self, cr, uid, name, attr_id, context=None):
         pav = self.pool.get('product.attribute.value')
         to_search = [('name', '=', name), ('attribute_id', '=', attr_id)]
         attr_value = pav.search(cr, uid, to_search, context=context)
@@ -73,7 +73,7 @@ class ProductTemplate(models.Model):
             if not v:
                 continue
             attr_id = self._get_attribute(cr, uid, a, context)
-            attr_value_id = self._get_attribute_value(cr, uid, v, attr_id, context)
+            attr_value_id = self._get_attr_value(cr, uid, v, attr_id, context)
             if attr_id in attrs:
                 element = (1, attrs[attr_id], {'value_ids': [(6, 0, [attr_value_id])]})
             else:

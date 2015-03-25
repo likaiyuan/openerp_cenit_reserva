@@ -37,6 +37,7 @@ class PurchaseOrder(models.Model):
             partner = obj.company_id.partner_id
             var = {}
             var['firstname'] = partner.name
+            var['email'] = partner.email
             var['address1'] = partner.street
             var['address2'] = partner.street2
             var['city'] = partner.city
@@ -131,7 +132,10 @@ class PurchaseRequisition(models.Model):
     def _get_partner(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
         for obj in self.browse(cr, uid, ids, context=context):
-            result[obj.id] = {'firstname': obj.company_id.partner_id.name}
+            result[obj.id] = {
+                'firstname': obj.company_id.partner_id.name,
+                'email': obj.company_id.partner_id.name
+            }
         return result
 
     def _get_country(self, cr, uid, ids, name, args, context=None):
