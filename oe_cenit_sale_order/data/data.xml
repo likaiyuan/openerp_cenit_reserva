@@ -18,7 +18,7 @@
         </record>
 		
 		<record id="data_type_sale_order_state" model="cenit.data.type.line">
-            <field name="name">state</field>
+            <field name="name">status</field>
 			<field name="line_type">field</field>
 			<field name="value">status</field>
 			<field name="data_type_id" ref="data_type_sale_order"/>

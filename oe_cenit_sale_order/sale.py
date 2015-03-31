@@ -3,7 +3,16 @@ import openerp
 from openerp import models
 from openerp.osv import fields
 
-STATES = openerp.addons.sale.sale.sale_order._columns['state'].selection
+STATES_OUT = {
+    'draft': 'draft-bid',
+    'sent': 'sent-bid',
+    'manual': 'manual-approved'
+}
+
+STATES_IN = {
+    'bid-sent': 'quotation_sent',
+    'approved-manual': 'order_confirm'
+}
 
 
 class SaleOrder(models.Model):
@@ -22,6 +31,17 @@ class SaleOrder(models.Model):
         new_vals['price_unit'] = vals['price']
         new_vals['product_uom_qty'] = vals['quantity']
         return new_vals
+
+    def _set_status(self, cr, uid, oid, name, value, args, context=None):
+        if value in STATES_IN:
+            self.signal_workflow(cr, uid, [oid], STATES_IN[value])
+        return True
+
+    def _get_status(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = STATES_OUT.get(obj.state, obj.state)
+        return result
 
     def _set_company(self, cr, uid, oid, name, value, args, context=None):
         return True
@@ -88,6 +108,8 @@ class SaleOrder(models.Model):
         return dict.fromkeys(ids, '')
 
     _columns = {
+        'status': fields.function(_get_status, method=True, type='char',
+                                  fnct_inv=_set_status),
         'supplier_address': fields.function(_get_company, method=True,
                                             type='char', fnct_inv=_set_company,
                                             priority=1),

@@ -164,18 +164,27 @@ class ProductTemplate(models.Model):
         for var in value:
             domain = [('name', '=', var['firstname'])]
             pid = partner.search(cr, uid, domain)
+            vals = {
+                'supplier': True,
+                'is_company': True,
+                'email': var.get('email', False)
+            }
             if pid:
                 pid = pid[0]
+                partner.write(cr, uid, pid, vals)
             else:
-                domain += [('supplier', '=', True), ('is_company', '=', True)]
-                pid = partner.create(cr, uid, {x[0]: x[2] for x in domain})
+                vals.update({'name': var['firstname']})
+                pid = partner.create(cr, uid, vals)
             sellers.append((0, 0, {'name': pid}))
         self.write(cr, uid, oid, {'seller_ids': sellers})
 
     def _get_suppliers(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)
         for obj in self.browse(cr, uid, ids, context=context):
-            result[obj.id] = [{'firstname': si.name.name} for si in obj.seller_ids if si.name]
+            result[obj.id] = [{
+                               'firstname': si.name.name,
+                               'email': si.name.email}
+                              for si in obj.seller_ids if si.name]
         return result
 
     _columns = {

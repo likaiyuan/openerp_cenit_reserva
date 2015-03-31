@@ -3,7 +3,16 @@ import openerp
 from openerp import models
 from openerp.osv import fields
 
-STATES = openerp.addons.purchase.purchase.purchase_order.STATE_SELECTION
+STATES_OUT = {
+    'bid': 'bid-sent',
+    'approved': 'approved-manual'
+}
+
+STATES_IN = {
+    'draft-bid': 'bid_received',
+    'sent-bid': 'bid_received',
+    'manual-approved': 'purchase_confirm'
+}
 
 
 class PurchaseOrder(models.Model):
@@ -23,9 +32,22 @@ class PurchaseOrder(models.Model):
         new_vals['product_qty'] = vals['quantity']
         return new_vals
 
+    def _set_status(self, cr, uid, oid, name, value, args, context=None):
+        if value in STATES_IN:
+            self.signal_workflow(cr, uid, [oid], STATES_IN[value])
+        return True
+
+    def _get_status(self, cr, uid, ids, name, args, context=None):
+        result = dict.fromkeys(ids, False)
+        for obj in self.browse(cr, uid, ids, context=context):
+            result[obj.id] = STATES_OUT.get(obj.state, obj.state)
+        return result
+
     def _set_company(self, cr, uid, oid, name, value, args, context=None):
         company = self.pool.get('res.company')
-        company_ids = company.search(cr, uid, [('name', '=', value['firstname'])], context=context)
+        company_ids = company.search(cr, uid,
+                                     [('name', '=', value['firstname'])],
+                                     context=context)
         if not company_ids:
             # This order is not for this company
             raise openerp.exceptions.AccessDenied()
@@ -81,6 +103,8 @@ class PurchaseOrder(models.Model):
         return result
 
     _columns = {
+        'status': fields.function(_get_status, method=True, type='char',
+                                  fnct_inv=_set_status),
         'billing_address': fields.function(_get_company, method=True,
                                             type='char', fnct_inv=_set_company,
                                             priority=1),
