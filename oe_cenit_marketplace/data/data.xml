@@ -420,6 +420,50 @@
 			<field name="value">source</field>
 			<field name="data_type_id" ref="data_type_attribute"/>
         </record>
+		
+		<!-- Incoterm -->
+		
+		<record id="data_type_incoterm" model="cenit.data.type">
+            <field name="name">incoterm</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'stock.incoterms')]" />
+        </record>
+		
+		<record id="data_type_incoterm_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_incoterm"/>
+        </record>
+		
+		<record id="data_type_incoterm_code" model="cenit.data.type.line">
+            <field name="name">code</field>
+			<field name="line_type">field</field>
+			<field name="value">code</field>
+			<field name="data_type_id" ref="data_type_incoterm"/>
+        </record>
+		
+		<!-- Payment Term -->
+		
+		<record id="data_type_payment_term" model="cenit.data.type">
+            <field name="name">payment_term</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'account.payment.term')]" />
+        </record>
+		
+		<record id="data_type_payment_term_name" model="cenit.data.type.line">
+            <field name="name">name</field>
+			<field name="line_type">field</field>
+			<field name="value">id</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_payment_term"/>
+        </record>
+		
+		<record id="data_type_payment_term_note" model="cenit.data.type.line">
+            <field name="name">note</field>
+			<field name="line_type">field</field>
+			<field name="value">note</field>
+			<field name="data_type_id" ref="data_type_payment_term"/>
+        </record>
 		   
     </data>
 </openerp>

@@ -39,10 +39,33 @@
 			<field name="data_type_id" ref="data_type_sale_order"/>
         </record>
 		
+		<record id="data_type_sale_order_incoterm" model="cenit.data.type.line">
+            <field name="name">incoterm</field>
+			<field name="line_type">reference</field>
+			<field name="value">incoterm</field>
+			<field name="reference_id" ref="oe_cenit_marketplace.data_type_incoterm" />
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_payment_term" model="cenit.data.type.line">
+            <field name="name">payment_term</field>
+			<field name="line_type">reference</field>
+			<field name="value">payment_term</field>
+			<field name="reference_id" ref="oe_cenit_marketplace.data_type_payment_term" />
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
 		<record id="data_type_sale_order_date_order" model="cenit.data.type.line">
             <field name="name">date_order</field>
 			<field name="line_type">field</field>
 			<field name="value">placed_on</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_note" model="cenit.data.type.line">
+            <field name="name">note</field>
+			<field name="line_type">field</field>
+			<field name="value">note</field>
 			<field name="data_type_id" ref="data_type_sale_order"/>
         </record>
 		
