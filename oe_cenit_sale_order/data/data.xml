@@ -92,10 +92,31 @@
 			<field name="data_type_id" ref="data_type_sale_order"/>
         </record>
 		
+		<record id="data_type_sale_order_destination_carrier" model="cenit.data.type.line">
+            <field name="name">carrier</field>
+			<field name="line_type">field</field>
+			<field name="value">carrier</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
 		<record id="data_type_sale_order_destination_city" model="cenit.data.type.line">
             <field name="name">destination_city</field>
 			<field name="line_type">field</field>
 			<field name="value">destination_city</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_mode_of_payment" model="cenit.data.type.line">
+            <field name="name">mode_of_payment</field>
+			<field name="line_type">field</field>
+			<field name="value">mode_of_payment</field>
+			<field name="data_type_id" ref="data_type_sale_order"/>
+        </record>
+		
+		<record id="data_type_sale_order_mode_of_transport" model="cenit.data.type.line">
+            <field name="name">mode_of_transport</field>
+			<field name="line_type">field</field>
+			<field name="value">mode_of_transport</field>
 			<field name="data_type_id" ref="data_type_sale_order"/>
         </record>
 		
