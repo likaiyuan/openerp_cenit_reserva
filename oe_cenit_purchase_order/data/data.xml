@@ -34,16 +34,18 @@
 		
 		<record id="data_type_purchase_order_incoterm" model="cenit.data.type.line">
             <field name="name">incoterm_id</field>
-			<field name="line_type">reference</field>
+			<field name="line_type">model</field>
 			<field name="value">incoterm</field>
+			<field name="line_cardinality">2one</field>
 			<field name="reference_id" ref="oe_cenit_marketplace.data_type_incoterm" />
 			<field name="data_type_id" ref="data_type_purchase_order"/>
         </record>
 		
 		<record id="data_type_purchase_order_payment_term" model="cenit.data.type.line">
             <field name="name">payment_term_id</field>
-			<field name="line_type">reference</field>
+			<field name="line_type">model</field>
 			<field name="value">payment_term</field>
+			<field name="line_cardinality">2one</field>
 			<field name="reference_id" ref="oe_cenit_marketplace.data_type_payment_term" />
 			<field name="data_type_id" ref="data_type_purchase_order"/>
         </record>
