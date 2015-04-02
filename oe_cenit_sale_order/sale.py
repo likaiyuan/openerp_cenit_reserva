@@ -34,7 +34,7 @@ class SaleOrder(models.Model):
 
     def _set_status(self, cr, uid, oid, name, value, args, context=None):
         if value in STATES_IN:
-            self.signal_workflow(cr, uid, [oid], STATES_IN[value])
+            self.signal_workflow(cr, uid, [oid], STATES_IN[value], context)
         return True
 
     def _get_status(self, cr, uid, ids, name, args, context=None):
@@ -85,7 +85,7 @@ class SaleOrder(models.Model):
             else:
                 lines.append((0, 0, vals))
         if lines:
-            self.write(cr, uid, oid, {'order_line': lines})
+            self.write(cr, uid, oid, {'order_line': lines}, context)
 
     def _get_lines(self, cr, uid, ids, name, args, context=None):
         result = dict.fromkeys(ids, False)

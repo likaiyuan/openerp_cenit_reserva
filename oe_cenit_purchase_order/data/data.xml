@@ -62,6 +62,34 @@
 			<field name="data_type_id" ref="data_type_purchase_order"/>
         </record>
 		
+		<record id="data_type_purchase_order_city_of_origin" model="cenit.data.type.line">
+            <field name="name">city_of_origin</field>
+			<field name="line_type">field</field>
+			<field name="value">city_of_origin</field>
+			<field name="data_type_id" ref="data_type_purchase_order"/>
+        </record>
+		
+		<record id="data_type_purchase_order_departure_port" model="cenit.data.type.line">
+            <field name="name">departure_port</field>
+			<field name="line_type">field</field>
+			<field name="value">departure_port</field>
+			<field name="data_type_id" ref="data_type_purchase_order"/>
+        </record>
+		
+		<record id="data_type_purchase_order_arrival_port" model="cenit.data.type.line">
+            <field name="name">arrival_port</field>
+			<field name="line_type">field</field>
+			<field name="value">arrival_port</field>
+			<field name="data_type_id" ref="data_type_purchase_order"/>
+        </record>
+		
+		<record id="data_type_purchase_order_destination_city" model="cenit.data.type.line">
+            <field name="name">destination_city</field>
+			<field name="line_type">field</field>
+			<field name="value">destination_city</field>
+			<field name="data_type_id" ref="data_type_purchase_order"/>
+        </record>
+		
 		<record id="data_type_purchase_order_channel" model="cenit.data.type.line">
             <field name="name">origin</field>
 			<field name="line_type">field</field>
