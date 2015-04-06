@@ -11,7 +11,7 @@ STATES_OUT = {
 
 STATES_IN = {
     'bid-sent': 'quotation_sent',
-    'approved-manual': 'order_confirm'
+    'approved-to_approve': 'order_to_approve'
 }
 
 
@@ -46,8 +46,8 @@ class SaleOrder(models.Model):
     def _set_company(self, cr, uid, oid, name, value, args, context=None):
         return True
         company = self.pool.get('res.company')
-        company_ids = company.search(cr, uid, [('name', '=', value['firstname'])], context=context)
-        if not company_ids:
+        domain = [('name', '=', value['firstname'])]
+        if company.search(cr, uid, domain, context=context):
             # This order is not for this company
             raise openerp.exceptions.AccessDenied()
         return True
@@ -80,10 +80,7 @@ class SaleOrder(models.Model):
                 ('product_id.name', '=', var['product_id']),
             ]
             pl_ids = sale_line.search(cr, uid, domain)
-            if pl_ids:
-                lines.append((1, pl_ids[0], vals))
-            else:
-                lines.append((0, 0, vals))
+            lines.append(pl_ids and (1, pl_ids[0], vals) or (0, 0, vals))
         if lines:
             self.write(cr, uid, oid, {'order_line': lines}, context)
 

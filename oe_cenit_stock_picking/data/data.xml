@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+		<!-- Sale Order -->
+        
+        <record id="data_type_stock_picking" model="cenit.data.type">
+            <field name="name">picking</field>
+			<field name="model_id" model="ir.model" search="[('model', '=', 'stock.picking')]" />
+        </record>
+		
+		<record id="data_type_stock_picking_origin" model="cenit.data.type.line">
+            <field name="name">origin</field>
+			<field name="line_type">field</field>
+			<field name="value">origin</field>
+			<field name="primary" eval="True"/>
+			<field name="data_type_id" ref="data_type_stock_picking"/>
+        </record>
+		
+		<record id="data_type_stock_picking_origin_lines" model="cenit.data.type.line">
+            <field name="name">lines</field>
+			<field name="line_type">field</field>
+			<field name="value">lines</field>
+			<field name="data_type_id" ref="data_type_stock_picking"/>
+        </record>
+		   
+    </data>
+</openerp>

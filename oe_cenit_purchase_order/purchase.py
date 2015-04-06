@@ -5,7 +5,7 @@ from openerp.osv import fields
 
 STATES_OUT = {
     'bid': 'bid-sent',
-    'approved': 'approved-manual'
+    'approved': 'approved-to_approve'
 }
 
 STATES_IN = {
