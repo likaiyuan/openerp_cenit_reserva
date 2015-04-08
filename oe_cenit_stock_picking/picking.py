@@ -56,6 +56,7 @@ class StockPicking(models.Model):
                 var = {}
                 var['product_id'] = line.product_id.name
                 var['quantity'] = line.product_uom_qty
+                var['received_quantity'] = line.received_quantity
                 lines.append(var)
             result[obj.id] = lines
         return result
